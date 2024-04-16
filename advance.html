@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Vue Advance</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="app">
+    <!-- Computing Property -->
+    <form action="">
+        <input type="text" placeholder="first name" v-model="firstName"><br>
+        <input type="text" placeholder="middle name" v-model="middleName"><br>
+        <input type="text" placeholder="last name" v-model="lastName"><br>
+    </form>
+    <!-- End Computing Property -->
+
+    <h4>Full Name : {{ fullName }}</h4>
+    <h4>Tes : <span v-text="txt.data1"></span></h4>
+</div>
+</body>
+<script src="advance.js"></script>
+</html>
