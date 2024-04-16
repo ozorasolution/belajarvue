@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <style>
+        .textMerah{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World</h1>
+
+    <div id="app">
+        <!-- v-directive, dan data -->
+        <p v-text="judul"></p>
+        <div v-html="message"></div>
+        <!-- v-directive end -->
+
+        <!-- Decision -->
+        <div v-if="show==1">{{ showMsg }}</div>
+        <div v-else-if="show==2">{{ showMsg2 }}</div>
+        <div v-else-if="show>2 && show<=5">{{ showMsg3 }}</div>
+        <div v-else>{{ showElse }}</div>
+        <div v-show="tesBool">Tulisan muncul ketika value tesBool true</div>
+        <button @click="setBool">Set Value True</button>
+        <!-- Decision End -->
+
+        <!-- Loop -->
+        <div style="display: flex; flex-direction: row; gap: 2px;">
+            <div v-for="angka in 10">{{ angka }}</div>
+        </div>
+        <ul>
+            <li v-for="angka in 10">{{ angka }}</li>
+        </ul>
+        <ul>
+            <li v-for="(data, index) in fruits">{{ data }} {{index}} 
+                <button @click="hapus(index)">X</button>
+            </li>
+        </ul>
+        <ul>
+            <li v-for="data in futbal">{{ data.name }}, Position: {{ data.position }}</li>
+        </ul>
+        <!-- Loop End -->
+
+        <!-- Event Handling -->
+        <button v-on:click="count--">-</button>
+        {{ count }}
+        <button @click="tambah()">+</button>
+    </div>
+
+    <div id="app2">
+        <p v-text="judul"></p>
+        <input @keyup.enter="notif" />
+        <div @click.right.ctrl="doSomething">Do something</div>
+
+        <!-- V-Binding untuk atribute elemen -->
+        <a v-bind:href="tiket">Tiket IT</a> &nbsp
+        <a :href="tiket">Tiket IT</a>
+        <br><br>
+        Karyawan:
+        <h1 v-text="kary.nama" :class="kary.textRed"></h1>
+        <img :src="kary.image" :style="{width: kary.width}" :alt="kary.alt">
+        <br><br>
+        <!-- V-Binding End -->
+
+        <!-- V-Model -->
+        <input type="text" placeholder="Username" v-model="usrnm"><br><br>
+        <textarea type="text" placeholder="Alamat" v-model="address"></textarea><br>
+        Gender<br>
+        <input type="radio" value="pria" v-model="gender">Pria
+        <input type="radio" value="wanita" v-model="gender">Wanita
+        <input type="radio" value="lain" v-model="gender">Lainnya
+        <!-- Kalau select ketika ga ada value nya dia ambil html textnya -->
+        <br><br>Pekerjaan: &nbsp<select v-model="kerja" @change="jobChange">
+            <option :value="0" selected>Pilih data</option>
+            <option :value="data.id" v-for="data in jobs">{{ data.job }}</option>
+        </select>
+        <br><br>Hobby: <br>
+        <input type="checkbox" v-model="hobbies" value="Renang">Renang
+        <input type="checkbox" v-model="hobbies" value="Musik">Musik
+        <input type="checkbox" v-model="hobbies" value="Olahraga">Olahraga
+        
+        <p>Username : {{ usrnm }}</p>
+        <p>Alamat : {{ address }}</p>
+        <p>Gender : 
+            <span v-if="gender=='pria'">Cowok</span>
+            <span v-else-if="gender=='wanita'">Cewek</span>
+            <span v-else-if="gender=='lain'">Aneh</span>
+            <span v-else>-</span>
+        </p>
+        <p>Pekerjaan : <span id="job-view">-</span></p>
+        <p>Hobby : <span v-if="hobbies.length > 0">
+            <ul>
+                <li v-for="data in hobbies">{{ data }}</li>
+            </ul>
+        </p>
+        <!-- V-Model End -->
+    </div>
+
+    <script src="app.js"></script>
+    <script src="app2.js"></script>
+</body>
+</html>
